@@ -2,8 +2,6 @@ from typing import List, Generator, Optional
 
 import numpy as np
 
-from logging_utils import print_board
-
 
 class Board:
     last_drawn_number = 0
@@ -77,26 +75,3 @@ def find_last_board_to_win(boards: List[Board], drawn_numbers: List[int]) -> Opt
                 is_last_board = all(board.board_complete for board in boards)
                 if is_last_board:
                     return board
-
-
-if __name__ == "__main__":
-    with open("input.txt", "r") as f:
-        lines = [line.strip() for line in f.readlines()]
-
-    drawn_numbers = get_input(lines[0])
-
-    boards = []
-    for board in get_boards(lines[2:]):
-        boards.append(board)
-
-    # print_live_boards(boards, drawn_numbers)
-
-    # find the first board to win
-    board = find_first_board_to_win(boards, drawn_numbers)
-    print(f"First Board Score: {board.get_score()}")
-    print_board(board)
-
-    # find the last board to win
-    board = find_last_board_to_win(boards, drawn_numbers)
-    print(f"Last Board Score: {board.get_score()}")
-    print_board(board)
